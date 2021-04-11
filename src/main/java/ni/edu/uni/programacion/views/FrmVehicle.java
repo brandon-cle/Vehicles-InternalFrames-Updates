@@ -6,12 +6,16 @@
 package ni.edu.uni.programacion.views;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import ni.edu.uni.programacion.controllers.PnlVehicleController;
 import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
+import ni.edu.uni.programacion.views.InternalFrames.IFNew;
+import ni.edu.uni.programacion.views.InternalFrames.IFView;
 import ni.edu.uni.programacion.views.panels.PnlVehicle;
 import ni.edu.uni.programacion.views.panels.PnlViewVehicle;
 
@@ -25,10 +29,17 @@ public class FrmVehicle extends javax.swing.JFrame {
     
     private PnlViewVehicle pnlViewVehicle;
     private PnlViewVehicleController pnlViewVehicleController;
+    //
+    public static IFNew ifn;
+    public static IFView ifv;
+    public static boolean x;
+    
+    //
     /**
      * Creates new form FrmVehicle
      */
     public FrmVehicle() {
+        setExtendedState(MAXIMIZED_BOTH);
         initComponents();
     }
 
@@ -41,83 +52,154 @@ public class FrmVehicle extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        btnNew = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        pnlTop = new javax.swing.JPanel();
-        pnlContent = new javax.swing.JPanel();
+        DeskContent = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnuiNew = new javax.swing.JMenuItem();
+        mnuiView = new javax.swing.JMenuItem();
+        Separator = new javax.swing.JPopupMenu.Separator();
+        mnuiExit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSplitPane1.setDividerLocation(120);
-        jSplitPane1.setOneTouchExpandable(true);
+        DeskContent.setBackground(new java.awt.Color(51, 51, 51));
+        DeskContent.setName(""); // NOI18N
 
-        jPanel1.setLayout(new java.awt.GridLayout(5, 1, 0, 5));
+        javax.swing.GroupLayout DeskContentLayout = new javax.swing.GroupLayout(DeskContent);
+        DeskContent.setLayout(DeskContentLayout);
+        DeskContentLayout.setHorizontalGroup(
+            DeskContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 455, Short.MAX_VALUE)
+        );
+        DeskContentLayout.setVerticalGroup(
+            DeskContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 379, Short.MAX_VALUE)
+        );
 
-        btnNew.setText("New");
-        btnNew.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("File");
+
+        mnuiNew.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuiNew.setText("New");
+        mnuiNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewActionPerformed(evt);
+                mnuiNewActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNew);
+        jMenu1.add(mnuiNew);
 
-        btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
+        mnuiView.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mnuiView.setText("View vehicle list");
+        mnuiView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
+                mnuiViewActionPerformed(evt);
             }
         });
-        jPanel1.add(btnView);
+        jMenu1.add(mnuiView);
+        jMenu1.add(Separator);
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        mnuiExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mnuiExit.setText("Exit");
+        mnuiExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuiExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuiExit);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        jMenuBar1.add(jMenu1);
 
-        pnlTop.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.add(pnlTop, java.awt.BorderLayout.PAGE_START);
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
-        pnlContent.setLayout(new java.awt.BorderLayout());
-        jPanel2.add(pnlContent, java.awt.BorderLayout.CENTER);
+        setJMenuBar(jMenuBar1);
 
-        jSplitPane1.setRightComponent(jPanel2);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DeskContent)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(DeskContent)
+        );
 
-        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
-
-        setSize(new java.awt.Dimension(471, 548));
+        setSize(new java.awt.Dimension(471, 440));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        if(pnlVehicle == null){
+    private void turningon()
+    {
+        if(ifn == null)
+        {
+            mnuiNew.setEnabled(true);
+        }
+        else{
+            mnuiNew.setEnabled(false);
+        }
+        
+        if(ifv == null)
+        {
+            mnuiView.setEnabled(true);
+        }
+        else{
+            mnuiView.setEnabled(false);
+        }
+    }
+    private void mnuiNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiNewActionPerformed
+        
+            
+        if(ifn == null)
+        {
+            mnuiNew.setEnabled(false);
+            ifn = new IFNew();
             pnlVehicle = new PnlVehicle();
+            ifn.addComponent(pnlVehicle);
+            this.DeskContent.add(ifn);
+            //
             try {
-                pnlVehicleController = new  PnlVehicleController(pnlVehicle);
+                pnlVehicleController = new PnlVehicleController(pnlVehicle);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(FrmVehicle.class.getName()).log(Level.SEVERE, null, ex);
             }
+            Dimension DeskContentSize = DeskContent.getSize();
+            Dimension IFNew = ifn.getSize();
+            ifn.setLocation((DeskContentSize.width - IFNew.width)/2,(DeskContentSize.height - IFNew.height)/2);
+            //x,y
+           ifn.show();
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "the window is already opened");
+            
         }
-        
-        addComponent(pnlVehicle);
-    }//GEN-LAST:event_btnNewActionPerformed
+    }//GEN-LAST:event_mnuiNewActionPerformed
 
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        if(pnlViewVehicle == null){
+    private void mnuiExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnuiExitActionPerformed
+
+    private void mnuiViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuiViewActionPerformed
+        
+            
+        if(ifv == null)
+        {
+            ifv = new IFView();
             pnlViewVehicle = new PnlViewVehicle();
             pnlViewVehicleController = new PnlViewVehicleController(pnlViewVehicle);
+            ifv.addComponent(pnlViewVehicle);
+            this.DeskContent.add(ifv);
+            //
+            Dimension DeskContentSize = DeskContent.getSize();
+            Dimension IFView = ifv.getSize();
+            ifv.setLocation((DeskContentSize.width - IFView.width)/2,(DeskContentSize.height - IFView.height)/2);
+            //x,y
+           ifv.show();
         }
-        addComponent(pnlViewVehicle);
-    }//GEN-LAST:event_btnViewActionPerformed
-
-     private void addComponent(JComponent component) {
-        pnlContent.removeAll();
-        pnlContent.add(component, BorderLayout.CENTER);
         
-        validate();
-        repaint();
-    }
+    }//GEN-LAST:event_mnuiViewActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -154,12 +236,13 @@ public class FrmVehicle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNew;
-    private javax.swing.JButton btnView;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel pnlContent;
-    private javax.swing.JPanel pnlTop;
+    public static javax.swing.JDesktopPane DeskContent;
+    private javax.swing.JPopupMenu.Separator Separator;
+    public static javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mnuiExit;
+    public static javax.swing.JMenuItem mnuiNew;
+    private javax.swing.JMenuItem mnuiView;
     // End of variables declaration//GEN-END:variables
 }

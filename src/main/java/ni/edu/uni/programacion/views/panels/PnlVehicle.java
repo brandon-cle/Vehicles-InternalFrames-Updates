@@ -13,6 +13,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import ni.edu.uni.programacion.views.FrmVehicle;
+import static ni.edu.uni.programacion.views.FrmVehicle.ifn;
+import static ni.edu.uni.programacion.views.FrmVehicle.mnuiNew;
 
 /**
  *
@@ -112,6 +115,7 @@ public class PnlVehicle extends javax.swing.JPanel {
 
         btngTransmission = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -151,6 +155,14 @@ public class PnlVehicle extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        jButton1.setText("New");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+
         btnSave.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btnSave.setForeground(new java.awt.Color(0, 153, 102));
         btnSave.setText("Save");
@@ -159,6 +171,11 @@ public class PnlVehicle extends javax.swing.JPanel {
         btnCancel.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(204, 0, 51));
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCancel);
 
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
@@ -174,6 +191,8 @@ public class PnlVehicle extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel2.add(jLabel1, gridBagConstraints);
 
+        txtStock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        txtStock.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txtStock.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtStockFocusLost(evt);
@@ -249,6 +268,13 @@ public class PnlVehicle extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel2.add(jLabel5, gridBagConstraints);
+
+        txtStyle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        txtStyle.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtStyleFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -266,6 +292,13 @@ public class PnlVehicle extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel2.add(jLabel6, gridBagConstraints);
+
+        fmtVin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        fmtVin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fmtVinFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -390,6 +423,13 @@ public class PnlVehicle extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel2.add(jLabel12, gridBagConstraints);
+
+        txtEngine.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        txtEngine.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEngineFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 11;
@@ -448,14 +488,66 @@ public class PnlVehicle extends javax.swing.JPanel {
 
     private void txtStockFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStockFocusLost
         if(txtStock.getText().isEmpty()){
-            txtStock.requestFocus();
             txtStock.setBorder(new LineBorder(Color.RED, 1));
-            return;
+        }else
+        {
+            txtStock.setBorder(new LineBorder(Color.GRAY, 1));
         }
-        
-        txtStock.setBorder(null);
     }//GEN-LAST:event_txtStockFocusLost
 
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      txtStock.setText(null);
+      txtStyle.setText(null);
+      fmtVin.setText(null);
+      txtEngine.setText(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void changingColor()
+    {
+        
+        txtStock.setBorder(new LineBorder(Color.GRAY, 1));
+        txtStyle.setBorder(new LineBorder(Color.GRAY, 1));
+        fmtVin.setBorder(new LineBorder(Color.GRAY, 1));
+        txtEngine.setBorder(new LineBorder(Color.GRAY, 1));
+    }
+    private void txtStyleFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtStyleFocusLost
+       if(PnlVehicle.txtStyle.getText().isEmpty())
+        {
+              txtStyle.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            txtStyle.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+    }//GEN-LAST:event_txtStyleFocusLost
+
+    private void fmtVinFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fmtVinFocusLost
+        if(fmtVin.getText().isEmpty())
+        {
+              fmtVin.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            fmtVin.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+    }//GEN-LAST:event_fmtVinFocusLost
+
+    private void txtEngineFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEngineFocusLost
+        if(txtEngine.getText().isEmpty())
+        {
+              txtEngine.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            txtEngine.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+    }//GEN-LAST:event_txtEngineFocusLost
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        ifn.dispose();
+        ifn = null;
+        mnuiNew.setEnabled(true);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBrowse;
@@ -468,7 +560,8 @@ public class PnlVehicle extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cmbModel;
     private javax.swing.JComboBox<String> cmbStatus;
     private javax.swing.JComboBox<String> cmbYear;
-    private javax.swing.JFormattedTextField fmtVin;
+    public static javax.swing.JFormattedTextField fmtVin;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -489,9 +582,9 @@ public class PnlVehicle extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbtnMan;
     private javax.swing.JSpinner spnMiles;
     private javax.swing.JSpinner spnPrice;
-    private javax.swing.JTextField txtEngine;
+    public static javax.swing.JTextField txtEngine;
     private javax.swing.JTextField txtImage;
-    private javax.swing.JTextField txtStock;
-    private javax.swing.JTextField txtStyle;
+    public static javax.swing.JTextField txtStock;
+    public static javax.swing.JTextField txtStyle;
     // End of variables declaration//GEN-END:variables
 }

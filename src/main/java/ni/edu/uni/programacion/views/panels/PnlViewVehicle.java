@@ -5,8 +5,19 @@
  */
 package ni.edu.uni.programacion.views.panels;
 
+import java.awt.Dimension;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import ni.edu.uni.programacion.controllers.PnlVehicleController;
+import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
+import ni.edu.uni.programacion.views.FrmVehicle;
+import static ni.edu.uni.programacion.views.FrmVehicle.ifn;
+import ni.edu.uni.programacion.views.InternalFrames.IFNew;
+import ni.edu.uni.programacion.views.InternalFrames.IFView;
 
 /**
  *
@@ -14,6 +25,14 @@ import javax.swing.JTextField;
  */
 public class PnlViewVehicle extends javax.swing.JPanel {
 
+     private PnlVehicle pnlVehicle;
+    private PnlVehicleController pnlVehicleController;
+    
+    private PnlViewVehicle pnlViewVehicle;
+    private PnlViewVehicleController pnlViewVehicleController;
+    //
+    
+    private IFView ifv;
     /**
      * Creates new form PnlViewVehicle
      */
@@ -43,6 +62,9 @@ public class PnlViewVehicle extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtFinder = new javax.swing.JTextField();
+        pnlBotons = new javax.swing.JPanel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblViewVehicle = new javax.swing.JTable();
@@ -67,6 +89,19 @@ public class PnlViewVehicle extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        pnlBotons.add(btnUpdate);
+
+        btnDelete.setText("Delete");
+        pnlBotons.add(btnDelete);
+
+        add(pnlBotons, java.awt.BorderLayout.PAGE_END);
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -90,12 +125,57 @@ public class PnlViewVehicle extends javax.swing.JPanel {
         add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int row_selected = tblViewVehicle.getSelectedRow();
+        if(row_selected >= 0)
+        {
+            
+             if(ifn == null)
+            {
+             ifn = new IFNew();
+             pnlVehicle = new PnlVehicle();
+             ifn.addComponent(pnlVehicle);
+            //
+            try {
+                pnlVehicleController = new PnlVehicleController(pnlVehicle);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FrmVehicle.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //
+            PnlVehicle.txtStock.setText(tblViewVehicle.getValueAt(row_selected, 0).toString());
+            PnlVehicle.txtStyle.setText(tblViewVehicle.getValueAt(row_selected, 1).toString());
+            PnlVehicle.txtEngine.setText(tblViewVehicle.getValueAt(row_selected, 2).toString());
+            PnlVehicle.fmtVin.setText(tblViewVehicle.getValueAt(row_selected, 3).toString());
+            //
+            FrmVehicle.DeskContent.add(ifn);
+            Dimension DeskContentSize = FrmVehicle.DeskContent.getSize();
+            Dimension IFNew = ifn.getSize();
+            ifn.setLocation((DeskContentSize.width - IFNew.width)/2,(DeskContentSize.height - IFNew.height)/2);
+            //x,y
+            
+            
+           ifn.show();
+           }else
+        {
+           JOptionPane.showMessageDialog(null, "the window <New Vehicle> must be closed");
+        }
+             
+        }else
+        {
+            JOptionPane.showMessageDialog(null, "You must select one of them");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlBotons;
     private javax.swing.JTable tblViewVehicle;
     private javax.swing.JTextField txtFinder;
     // End of variables declaration//GEN-END:variables

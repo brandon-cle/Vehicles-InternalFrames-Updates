@@ -8,6 +8,7 @@ package ni.edu.uni.programacion.controllers;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,9 +24,11 @@ import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 import ni.edu.uni.programacion.backend.dao.implementation.JsonVehicleDaoImpl;
 import ni.edu.uni.programacion.backend.pojo.Vehicle;
 import ni.edu.uni.programacion.backend.pojo.VehicleSubModel;
+import ni.edu.uni.programacion.views.FrmVehicle;
 import ni.edu.uni.programacion.views.panels.PnlVehicle;
 
 /**
@@ -46,6 +49,7 @@ public class PnlVehicleController {
     private String status[] = new String[]{"Active","Not available","Mantainance"};
     private JFileChooser fileChooser;
     private JsonVehicleDaoImpl jvdao;
+    public static boolean changing;
     
     public PnlVehicleController(PnlVehicle pnlVehicle) throws FileNotFoundException {
         this.pnlVehicle = pnlVehicle;
@@ -98,13 +102,48 @@ public class PnlVehicleController {
         
     }
 
-    private void btnSaveActionListener(ActionEvent e){
+    private void btnSaveActionListener(ActionEvent e)
+    {
         int stock, year;
         String make, model, style, vin, eColor, iColor, miles, engine, image, status;
         float price;
         Vehicle.Transmission transmission = Vehicle.Transmission.AUTOMATIC;
         
-        if(pnlVehicle.getTxtStock().getText().isEmpty()){
+        if(pnlVehicle.getTxtStock().getText().isEmpty() ||
+                pnlVehicle.getTxtStyle().getText().isEmpty() ||
+                pnlVehicle.getTxtEngine().getText().isEmpty() ||
+                pnlVehicle.getFmtVin().getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "You must complete the form");                                   
+            if(PnlVehicle.txtStock.getText().isEmpty()){
+            PnlVehicle.txtStock.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            PnlVehicle.txtStock.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+        
+        if(PnlVehicle.txtStyle.getText().isEmpty())
+        {
+              PnlVehicle.txtStyle.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            PnlVehicle.txtStyle.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+        
+        if(PnlVehicle.fmtVin.getText().isEmpty())
+        {
+              PnlVehicle.fmtVin.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            PnlVehicle.fmtVin.setBorder(new LineBorder(Color.GRAY, 1));
+        }
+        
+        if(PnlVehicle.txtEngine.getText().isEmpty())
+        {
+              PnlVehicle.txtEngine.setBorder(new LineBorder(Color.RED, 1));
+        }else
+        {
+            PnlVehicle.txtEngine.setBorder(new LineBorder(Color.GRAY, 1));
+        }
             return;
         }
         stock = Integer.parseInt(pnlVehicle.getTxtStock().getText());
@@ -136,6 +175,9 @@ public class PnlVehicleController {
                     "Error message", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(PnlVehicleController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        FrmVehicle.mnuiNew.setEnabled(true);
+        
     }
     
     private void btnBrowseActionListener(ActionEvent e){
